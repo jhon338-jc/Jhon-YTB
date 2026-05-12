@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JHON YTB CONVERTER</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="loading-screen">
+        <div class="loader-circle"></div>
+        <div class="loader-text">MEMULAI SISTEM...</div>
+    </div>
+
+    <div id="main-app" class="hidden">
+        <div class="container">
+            
+            <header class="header">
+                <img src="https://via.placeholder.com/200x80/000000/ffffff?text=LOGO+JHON+YTB" alt="Logo Web" class="logo">
+                
+                <div class="info-box">
+                    <strong>CARA PAKAI:</strong><br>
+                    1. Tempel Link Youtube<br>
+                    2. Pilih Format (MP3 / MP4)<br>
+                    3. Konvert lalu klik Unduh.
+                </div>
+            </header>
+
+            <div class="converter-box">
+                <label class="input-label">URL YOUTUBE:</label>
+                <div class="input-wrapper">
+                    <input type="text" id="urlInput" placeholder="https://youtube.com/watch?v=..." autocomplete="off">
+                    
+                    <button class="action-btn paste" onclick="pasteLink()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                    <button class="action-btn clear" onclick="clearLink()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+
+                <label class="input-label">PILIH FORMAT:</label>
+                <div class="format-wrapper">
+                    <label class="format-radio">
+                        <input type="radio" name="format" value="audio" checked>
+                        <div class="radio-btn">MP3 (AUDIO)</div>
+                    </label>
+                    <label class="format-radio">
+                        <input type="radio" name="format" value="video">
+                        <div class="radio-btn">MP4 (VIDEO)</div>
+                    </label>
+                </div>
+
+                <button id="btnConvert" onclick="prosesKonvert()" class="btn-main">
+                    KONVERT SEKARANG
+                </button>
+            </div>
+
+            <div id="status-proses" class="hidden">
+                <div class="progress-bar"><div class="progress-value"></div></div>
+                <div class="status-text">Server sedang memproses file...</div>
+            </div>
+
+            <div id="hasil-box" class="hidden">
+                <div class="result-container">
+                    <div id="media-preview" class="media-area"></div>
+                    <a id="btnDownload" href="#" class="btn-download" target="_blank">
+                        UNDUH SEKARANG (Simpan ke HP)
+                    </a>
+                </div>
+            </div>
+
+            <footer class="footer">
+                JHON338 YOUTUBE CONVERTER
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
