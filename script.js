@@ -26,7 +26,6 @@ function clearLink() {
 
 async function prosesKonvert() {
     const inputUrl = document.getElementById('urlInput').value;
-    // Ambil nilai radio button (audio / video)
     const formatPilihan = document.querySelector('input[name="format"]:checked').value; 
     
     if (!inputUrl || !inputUrl.includes('youtu')) {
@@ -38,8 +37,8 @@ async function prosesKonvert() {
     document.getElementById('status-proses').classList.remove('hidden');
 
     try {
-        // Nembak ke API Cobalt (Logika backend ditaruh di sini)
-        const respon = await fetch('https://api.cobalt.tools/api/json', {
+        // Menggunakan Server API Cobalt yang Baru (co.wuk.sh)
+        const respon = await fetch('https://co.wuk.sh/api/json', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,23 +46,28 @@ async function prosesKonvert() {
             },
             body: JSON.stringify({
                 url: inputUrl,
-                isAudioOnly: formatPilihan === 'audio', // True jika pilih MP3
-                aFormat: "mp3", // Spesifik ke mp3 jika audio
+                isAudioOnly: formatPilihan === 'audio',
+                aFormat: "mp3",
                 vQuality: "720"
             })
         });
 
+        if (!respon.ok) {
+            throw new Error(`Server menolak akses (Status: ${respon.status})`);
+        }
+
         const data = await respon.json();
 
         if (data.url) {
-            // Ekstensi untuk nama file
             const ekstensi = formatPilihan === 'audio' ? 'mp3' : 'mp4';
             tampilkanHasil(data.url, formatPilihan, ekstensi);
         } else {
-            alert("Gagal konvert. Server sedang penuh, coba lagi.");
+            alert("Gagal konvert. Coba lagi dalam beberapa saat.");
         }
     } catch (error) {
-        alert("Gagal terhubung ke server.");
+        // Menampilkan pesan error yang lebih jelas
+        alert("Terjadi Kendala: " + error.message + "\n\nSistem keamanan browser atau API mungkin memblokir proses ini.");
+        console.error(error);
     } finally {
         document.getElementById('status-proses').classList.add('hidden');
     }
@@ -82,7 +86,6 @@ function tampilkanHasil(urlFile, format, ekstensi) {
         previewArea.innerHTML = `<audio src="${urlFile}" controls style="width: 100%; margin-top: 10px;"></audio>`;
     }
 
-    // Set tombol unduh biar langsung sedot ke penyimpanan HP
     tombolUnduh.onclick = (e) => {
         e.preventDefault();
         unduhFileKeHP(urlFile, `jhon_ytb.${ekstensi}`);
@@ -91,7 +94,6 @@ function tampilkanHasil(urlFile, format, ekstensi) {
     boxHasil.classList.remove('hidden');
 }
 
-// Fungsi tambahan untuk maksa file terunduh langsung (bukan cuma diputar)
 function unduhFileKeHP(url, namaFile) {
     fetch(url)
         .then(response => response.blob())
@@ -107,7 +109,6 @@ function unduhFileKeHP(url, namaFile) {
             document.body.removeChild(a);
         })
         .catch(() => {
-            // Kalau fetch blob gagal (biasanya karena CORS), pakai fallback buka tab baru
             const a = document.createElement('a');
             a.href = url;
             a.download = namaFile;
