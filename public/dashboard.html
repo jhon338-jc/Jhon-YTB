@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>JHON YTB - Dashboard</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#0a0a0a">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
-        <!-- Header with Profile -->
         <header class="app-header">
             <div class="header-left">
                 <h1 class="logo">JHON YTB</h1>
@@ -24,11 +22,9 @@
             </div>
         </header>
         
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Converter Card -->
             <div class="card converter-card">
-                <div class="card-title">YouTube Converter</div>
+                <div class="card-title">YouTube Downloader</div>
                 <div class="input-group">
                     <input type="text" id="urlInput" class="input-url" placeholder="Paste YouTube link here...">
                     <div class="input-actions">
@@ -40,37 +36,31 @@
                     <button class="type-option active" data-type="mp4" onclick="selectType('mp4')">Video MP4</button>
                     <button class="type-option" data-type="mp3" onclick="selectType('mp3')">Audio MP3</button>
                 </div>
-                <button id="convertBtn" onclick="convertVideo()" class="btn btn-convert">Convert Now →</button>
+                <button id="convertBtn" onclick="convertVideo()" class="btn btn-convert">Convert Now</button>
             </div>
             
-            <!-- Loading State -->
             <div id="loadingState" class="loading-card hidden">
                 <div class="loading-spinner"></div>
-                <p>Processing video data...</p>
+                <p>Processing...</p>
             </div>
             
-            <!-- Error State -->
             <div id="errorState" class="error-card hidden">
                 <div class="error-icon">⚠</div>
                 <p id="errorMessage"></p>
             </div>
             
-            <!-- Video Info Card (setelah konvert) -->
             <div id="videoInfo" class="video-info-card hidden"></div>
             
-            <!-- Results Container - Horizontal Scroll + Vertical List -->
             <div id="resultsContainer" class="results-container hidden"></div>
             
-            <!-- Guide Card -->
             <div class="card guide-card">
-                <div class="card-title">📖 Panduan Penggunaan</div>
+                <div class="card-title">Panduan</div>
                 <div class="guide-list">
-                    <div class="guide-item">1. Salin link video YouTube yang ingin diunduh</div>
-                    <div class="guide-item">2. Tempelkan link di kolom URL di atas</div>
-                    <div class="guide-item">3. Pilih format Video MP4 atau Audio MP3</div>
-                    <div class="guide-item">4. Klik Convert Now, tunggu proses</div>
-                    <div class="guide-item">5. Pilih kualitas yang diinginkan, klik Unduh</div>
-                    <div class="guide-item">6. File akan tersimpan dengan judul asli video</div>
+                    <div class="guide-item">1. Salin link video YouTube</div>
+                    <div class="guide-item">2. Tempelkan link di kolom URL</div>
+                    <div class="guide-item">3. Pilih Video MP4 atau Audio MP3</div>
+                    <div class="guide-item">4. Klik Convert Now</div>
+                    <div class="guide-item">5. Pilih kualitas, klik Download</div>
                 </div>
             </div>
         </main>
