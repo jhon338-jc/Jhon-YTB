@@ -1,0 +1,173 @@
+/* Splash Screen Animations */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    backdrop-filter: blur(10px);
+}
+
+.splash-content {
+    text-align: center;
+}
+
+.splash-glitch {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--main-white);
+    letter-spacing: 10px;
+    position: relative;
+    animation: splashGlitchPulse 1.5s ease infinite;
+}
+
+.splash-glitch::before,
+.splash-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.splash-glitch::before {
+    animation: splashGlitch 0.3s infinite;
+    color: var(--neon-cyan, #00ffcc);
+    z-index: -1;
+}
+
+.splash-glitch::after {
+    animation: splashGlitch 0.3s infinite reverse;
+    color: var(--neon-red, #ff0055);
+    z-index: -2;
+}
+
+@keyframes splashGlitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes splashGlitchPulse {
+    0%, 100% { opacity: 1; text-shadow: 0 0 5px #00ffcc; }
+    50% { opacity: 0.8; text-shadow: 0 0 20px #00ffcc; }
+}
+
+.dev-animation {
+    font-size: 2rem;
+    font-family: var(--font-mono);
+    margin-bottom: 30px;
+}
+
+.dev-bracket {
+    color: var(--neon-cyan, #00ffcc);
+    animation: bracketBlink 1s step-end infinite;
+}
+
+.dev-name {
+    color: var(--main-white);
+    letter-spacing: 5px;
+    font-weight: bold;
+}
+
+@keyframes bracketBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.dev-terminal {
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--neon-cyan, #00ffcc);
+    animation: terminalBlink 1s step-end infinite;
+}
+
+@keyframes terminalBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.splash-loading-bar {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan, #00ffcc), transparent);
+    margin-top: 30px;
+    animation: splashLoad 3s linear forwards;
+}
+
+@keyframes splashLoad {
+    0% { width: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    100% { width: 100%; opacity: 1; }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Type Selector */
+.type-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.type-btn {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid var(--gray-medium);
+    color: var(--gray-light);
+    font-family: var(--font-mono);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.type-btn.active {
+    border-color: var(--main-white);
+    color: var(--main-white);
+    background: rgba(255,255,255,0.1);
+}
+
+.user-info {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--gray-light);
+    margin-right: 15px;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid var(--gray-medium);
+    color: var(--main-white);
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: var(--gray-medium);
+}

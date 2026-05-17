@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>JHON YTB - YouTube Downloader</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+    <div class="bg-scan"></div>
+    
+    <!-- Layer 1: Nama Web -->
+    <div class="splash-screen" id="splashWeb">
+        <div class="splash-content">
+            <h1 class="splash-glitch" data-text="JHON YTB">JHON YTB</h1>
+            <div class="splash-loading-bar"></div>
+        </div>
+    </div>
+    
+    <!-- Layer 2: Nama Developer -->
+    <div class="splash-screen hidden" id="splashDev">
+        <div class="splash-content">
+            <div class="dev-animation">
+                <span class="dev-bracket">&lt;</span>
+                <span class="dev-name">JHON338</span>
+                <span class="dev-bracket">&gt;</span>
+            </div>
+            <div class="splash-loading-bar"></div>
+            <div class="dev-terminal">_system_online.exe</div>
+        </div>
+    </div>
+    
+    <!-- Login Form -->
+    <div class="login-container hidden" id="loginContainer">
+        <div class="glitch-box">
+            <h1 class="glitch-text" data-text="ACCESS SYSTEM">ACCESS SYSTEM</h1>
+        </div>
+        <div class="login-form">
+            <div class="terminal-line">>_ AUTHENTICATION_REQUIRED</div>
+            <input type="text" id="username" class="cyber-input-login" placeholder="USERNAME" autocomplete="off">
+            <button onclick="loginUser()" class="cyber-button-login">>> ENTER SYSTEM</button>
+            <p class="demo-hint">* Masukkan username apapun untuk akses</p>
+        </div>
+    </div>
 
+    <script>
+        // Animasi berurutan: Web 3 detik -> Developer 3 detik -> Login
+        const splashWeb = document.getElementById('splashWeb');
+        const splashDev = document.getElementById('splashDev');
+        const loginContainer = document.getElementById('loginContainer');
+        
+        // Cek sudah login sebelumnya
+        if (localStorage.getItem('jhon_user')) {
+            window.location.href = 'dashboard.html';
+        }
+        
+        // Animasi 3 detik pertama (Nama Web)
+        setTimeout(() => {
+            splashWeb.classList.add('fade-out');
+            setTimeout(() => {
+                splashWeb.classList.add('hidden');
+                splashDev.classList.remove('hidden');
+                splashDev.classList.add('fade-in');
+                
+                // Animasi 3 detik kedua (Nama Developer)
+                setTimeout(() => {
+                    splashDev.classList.add('fade-out');
+                    setTimeout(() => {
+                        splashDev.classList.add('hidden');
+                        loginContainer.classList.remove('hidden');
+                        loginContainer.classList.add('fade-in');
+                    }, 500);
+                }, 3000);
+            }, 500);
+        }, 3000);
+        
+        function loginUser() {
+            const username = document.getElementById('username').value.trim();
+            if (username) {
+                localStorage.setItem('jhon_user', username);
+                window.location.href = 'dashboard.html';
+            }
+        }
+    </script>
+</body>
+</html>
