@@ -2,13 +2,13 @@
   "name": "jhon-ytb",
   "version": "2.0.0",
   "description": "YouTube Downloader MP3/MP4 by JHON338",
-  "main": "api/index.js",
   "type": "module",
+  "main": "api/index.js",
   "license": "MIT",
   "scripts": {
     "vercel-build": "echo build completed"
   },
   "dependencies": {
-    "axios": "^1.6.0"
+    "ytdl-core": "^4.11.5"
   }
 }
