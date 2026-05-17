@@ -647,3 +647,62 @@ body {
         display: none;
     }
 }
+
+/* Tambahan di bagian akhir file style.css */
+
+/* Perbaikan untuk mode HP - nama user tetap muncul */
+@media (max-width: 480px) {
+    .profile-name {
+        display: inline-block !important;
+        font-size: 0.7rem;
+        max-width: 90px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .input-actions {
+        gap: 5px;
+    }
+    
+    .btn-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .input-url {
+        padding: 12px 14px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Linktree button styling */
+.linktree-footer {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.btn-linktree {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: var(--bg-color);
+    border: none;
+    border-radius: 30px;
+    box-shadow: var(--neu-btn);
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.05s linear;
+}
+
+.btn-linktree:active {
+    box-shadow: var(--neu-btn-active);
+    transform: scale(0.98);
+}

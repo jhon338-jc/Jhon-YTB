@@ -6,14 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
     
-    // PERBAIKAN: Cek hanya jika di halaman dashboard
-    // Jangan redirect dari index.html ke dashboard
     if (window.location.pathname.includes('dashboard.html')) {
         if (!user) {
             window.location.href = 'index.html';
         } else {
             if (profileName) {
-                profileName.textContent = user.toUpperCase();
+                // PERBAIKAN: Langsung tampilkan username asli, tanpa toUpperCase
+                profileName.textContent = user;
             }
         }
     }

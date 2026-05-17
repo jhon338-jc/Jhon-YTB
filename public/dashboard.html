@@ -9,6 +9,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Perbaikan untuk mode HP - tombol clear tidak mepet */
+        @media (max-width: 480px) {
+            .input-actions {
+                gap: 6px;
+            }
+            .btn-icon {
+                width: 42px;
+                height: 42px;
+            }
+            .profile-name {
+                display: inline-block !important;
+                font-size: 0.75rem;
+                max-width: 100px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .profile-info-header {
+                gap: 8px;
+            }
+        }
+        
+        /* Tombol Linktree di footer */
+        .linktree-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .btn-linktree {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: var(--bg-color);
+            border: none;
+            border-radius: 30px;
+            box-shadow: var(--neu-btn);
+            color: var(--text-main);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.05s linear;
+        }
+        .btn-linktree:active {
+            box-shadow: var(--neu-btn-active);
+            transform: scale(0.98);
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -70,6 +119,13 @@
                     <div class="guide-item"><i class="fa-solid fa-play"></i> 4. Klik Convert Now</div>
                     <div class="guide-item"><i class="fa-solid fa-download"></i> 5. Pilih kualitas, klik Download</div>
                 </div>
+            </div>
+            
+            <!-- Linktree Button di Bawah -->
+            <div class="linktree-footer">
+                <a href="https://jhon338-jc.github.io/Linktree/" target="_blank" class="btn-linktree">
+                    <i class="fa-solid fa-link"></i> MY LINKTREE (JHON338)
+                </a>
             </div>
         </main>
     </div>
