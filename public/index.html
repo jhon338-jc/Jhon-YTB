@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>JHON YTB - YouTube Downloader</title>
+    <title>JHON YTB - Login</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#0a0a0a">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="login-body">
     <div class="login-wrapper">
-        <!-- Splash Layer 1: Website Name (3 detik) -->
         <div class="splash-overlay" id="splashWeb">
             <div class="splash-card">
                 <h1 class="splash-title">JHON YTB</h1>
@@ -19,30 +17,28 @@
             </div>
         </div>
         
-        <!-- Splash Layer 2: Developer Name (2 detik) -->
         <div class="splash-overlay hidden" id="splashDev">
             <div class="splash-card">
                 <div class="dev-tag">
-                    <span class="dev-bracket">&lt;</span>
+                    <span class="dev-bracket">⟨</span>
                     <span class="dev-name">JHON338</span>
-                    <span class="dev-bracket">/&gt;</span>
+                    <span class="dev-bracket">⟩</span>
                 </div>
                 <div class="splash-progress"></div>
-                <p class="dev-status">system_ready.exe</p>
+                <p class="dev-status">system_ready</p>
             </div>
         </div>
         
-        <!-- Login Form -->
         <div class="login-panel hidden" id="loginPanel">
             <div class="login-header">
-                <div class="login-icon">🎧</div>
-                <h2>ACCESS SYSTEM</h2>
+                <div class="login-icon">▶</div>
+                <h2>Access System</h2>
                 <p>YouTube Downloader</p>
             </div>
             <div class="login-body-form">
-                <input type="text" id="username" class="input-field" placeholder="USERNAME" autocomplete="off">
-                <button onclick="loginUser()" class="btn btn-primary btn-block">→ ENTER</button>
-                <small class="demo-text">* Masukkan username apapun</small>
+                <input type="text" id="username" class="input-field" placeholder="Username" autocomplete="off">
+                <button onclick="loginUser()" class="btn btn-primary">Enter</button>
+                <small class="demo-text">Username wajib diisi</small>
             </div>
         </div>
     </div>
@@ -56,7 +52,6 @@
             window.location.href = 'dashboard.html';
         }
         
-        // 3 detik pertama (Nama Website)
         setTimeout(() => {
             splashWeb.classList.add('fade-out');
             setTimeout(() => {
@@ -64,24 +59,25 @@
                 splashDev.classList.remove('hidden');
                 splashDev.classList.add('fade-in');
                 
-                // 2 detik kedua (Nama Developer)
                 setTimeout(() => {
                     splashDev.classList.add('fade-out');
                     setTimeout(() => {
                         splashDev.classList.add('hidden');
                         loginPanel.classList.remove('hidden');
                         loginPanel.classList.add('fade-in');
-                    }, 300);
+                    }, 200);
                 }, 2000);
-            }, 300);
+            }, 200);
         }, 3000);
         
         function loginUser() {
             const username = document.getElementById('username').value.trim();
-            if (username) {
-                localStorage.setItem('jhon_user', username);
-                window.location.href = 'dashboard.html';
+            if (!username) {
+                alert('Username wajib diisi!');
+                return;
             }
+            localStorage.setItem('jhon_user', username);
+            window.location.href = 'dashboard.html';
         }
     </script>
 </body>
