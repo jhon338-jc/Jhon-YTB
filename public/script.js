@@ -6,19 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
     
-    if (!user && window.location.pathname.includes('dashboard.html')) {
-        window.location.href = 'index.html';
-    }
-    
-    if (profileName && user) {
-        profileName.textContent = user.toUpperCase();
+    // PERBAIKAN: Cek hanya jika di halaman dashboard
+    // Jangan redirect dari index.html ke dashboard
+    if (window.location.pathname.includes('dashboard.html')) {
+        if (!user) {
+            window.location.href = 'index.html';
+        } else {
+            if (profileName) {
+                profileName.textContent = user.toUpperCase();
+            }
+        }
     }
     
     if (profileAvatar) {
         profileAvatar.src = 'https://i.pinimg.com/736x/ea/fb/1a/eafb1a29da1c80bfe124d60d7f9a58ed.jpg';
     }
-    
-    loadHistory();
 });
 
 function logout() {
@@ -84,7 +86,6 @@ async function convertVideo() {
         
         renderVideoInfo(json.info);
         renderResults(json.data, json.type);
-        saveToHistory(url);
         
     } catch (err) {
         errorState.classList.remove('hidden');
@@ -98,10 +99,10 @@ async function convertVideo() {
 function renderVideoInfo(info) {
     const videoInfo = document.getElementById('videoInfo');
     videoInfo.innerHTML = `
-        <img src="${info.thumbnail}" class="video-thumbnail" alt="thumbnail" onerror="this.src='https://via.placeholder.com/70x52?text=No+Image'">
+        <img src="${info.thumbnail}" class="video-thumbnail" alt="thumbnail" onerror="this.src='https://via.placeholder.com/80x60?text=No+Image'">
         <div class="video-details">
             <div class="video-title">${escapeHtml(info.title)}</div>
-            <div class="video-meta">${escapeHtml(info.author)} • ${info.durationFormatted || info.duration || '00:00'}</div>
+            <div class="video-meta"><i class="fa-regular fa-user"></i> ${escapeHtml(info.author)} • <i class="fa-regular fa-clock"></i> ${info.durationFormatted || info.duration || '00:00'}</div>
         </div>
     `;
     videoInfo.classList.remove('hidden');
@@ -113,7 +114,6 @@ function renderResults(formats, type) {
     
     if (!formats || formats.length === 0) return;
     
-    // Grid 2 kolom - semua hasil dalam grid (2 slide ke samping, terus 2 slide lagi)
     const grid = document.createElement('div');
     grid.className = 'results-grid';
     
@@ -148,7 +148,7 @@ function createResultCard(format, type) {
     } else {
         previewHtml = `
             <div class="result-preview-audio">
-                <div class="audio-wave-icon">♪</div>
+                <div class="audio-wave-icon"><i class="fa-solid fa-headphones"></i></div>
                 <div class="audio-text">Audio Stream</div>
             </div>`;
     }
@@ -157,11 +157,11 @@ function createResultCard(format, type) {
         ${previewHtml}
         <div class="result-info">
             <div class="result-quality">
-                <span class="quality-badge">${format.quality}</span>
-                <span class="file-size">${format.size || 'Unknown'}</span>
+                <span class="quality-badge"><i class="fa-solid fa-microchip"></i> ${format.quality}</span>
+                <span class="file-size"><i class="fa-regular fa-hard-drive"></i> ${format.size || 'Unknown'}</span>
             </div>
             <button class="download-btn" data-url="${format.url}" data-filename="${filename}">
-                Download
+                <i class="fa-solid fa-download"></i> Download
             </button>
         </div>
     `;
@@ -178,8 +178,8 @@ function createResultCard(format, type) {
 }
 
 async function downloadFile(url, filename, btn) {
-    const originalText = btn.textContent;
-    btn.textContent = '...';
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Downloading...';
     btn.disabled = true;
     
     try {
@@ -196,42 +196,16 @@ async function downloadFile(url, filename, btn) {
         document.body.removeChild(a);
         URL.revokeObjectURL(blobUrl);
         
-        btn.textContent = 'Done';
+        btn.innerHTML = '<i class="fa-regular fa-circle-check"></i> Done';
         setTimeout(() => {
-            btn.textContent = originalText;
+            btn.innerHTML = originalText;
             btn.disabled = false;
         }, 1500);
     } catch (err) {
         window.open(url, '_blank');
-        btn.textContent = originalText;
+        btn.innerHTML = originalText;
         btn.disabled = false;
     }
-}
-
-function saveToHistory(url) {
-    let history = JSON.parse(localStorage.getItem('jhon_ytb_history')) || [];
-    if (history[0] !== url) {
-        history.unshift(url);
-        if (history.length > 5) history.pop();
-        localStorage.setItem('jhon_ytb_history', JSON.stringify(history));
-    }
-}
-
-function loadHistory() {
-    const historyList = document.getElementById('historyList');
-    if (!historyList) return;
-    
-    let history = JSON.parse(localStorage.getItem('jhon_ytb_history')) || [];
-    if (history.length === 0) {
-        historyList.innerHTML = '<div style="padding:14px; color:#888; font-size:0.75rem;">Belum ada riwayat</div>';
-        return;
-    }
-    
-    historyList.innerHTML = history.map(url => `
-        <div style="padding:10px 14px; border-bottom:1px solid var(--border); font-size:0.7rem;">
-            <a href="${url}" target="_blank" style="color:#888; text-decoration:none;">${url.length > 50 ? url.substring(0, 50) + '...' : url}</a>
-        </div>
-    `).join('');
 }
 
 function escapeHtml(str) {

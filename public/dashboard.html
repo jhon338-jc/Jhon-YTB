@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>JHON YTB - Dashboard</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0a0a0a">
+    <meta name="theme-color" content="#E6EEF5">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
         <header class="app-header">
             <div class="header-left">
-                <h1 class="logo">JHON YTB</h1>
+                <h1 class="logo"><i class="fa-solid fa-headphones"></i> JHON YTB</h1>
             </div>
             <div class="header-right" id="userProfile">
                 <div class="profile-info-header">
@@ -23,44 +25,50 @@
         </header>
         
         <main class="main-content">
+            <!-- Converter Card -->
             <div class="card converter-card">
-                <div class="card-title">YouTube Downloader</div>
+                <div class="card-title"><i class="fa-solid fa-download"></i> YouTube Downloader</div>
                 <div class="input-group">
                     <input type="text" id="urlInput" class="input-url" placeholder="Paste YouTube link here...">
                     <div class="input-actions">
-                        <button class="btn-icon" onclick="pasteLink()" title="Paste">📋</button>
-                        <button class="btn-icon" onclick="clearLink()" title="Clear">✖</button>
+                        <button class="btn-icon" onclick="pasteLink()" title="Paste"><i class="fa-solid fa-paste"></i></button>
+                        <button class="btn-icon" onclick="clearLink()" title="Clear"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
                 <div class="type-group">
-                    <button class="type-option active" data-type="mp4" onclick="selectType('mp4')">Video MP4</button>
-                    <button class="type-option" data-type="mp3" onclick="selectType('mp3')">Audio MP3</button>
+                    <button class="type-option active" data-type="mp4" onclick="selectType('mp4')"><i class="fa-solid fa-video"></i> Video MP4</button>
+                    <button class="type-option" data-type="mp3" onclick="selectType('mp3')"><i class="fa-solid fa-music"></i> Audio MP3</button>
                 </div>
-                <button id="convertBtn" onclick="convertVideo()" class="btn btn-convert">Convert Now</button>
+                <button id="convertBtn" onclick="convertVideo()" class="btn-convert"><i class="fa-solid fa-play"></i> Convert Now</button>
             </div>
             
+            <!-- Loading State -->
             <div id="loadingState" class="loading-card hidden">
                 <div class="loading-spinner"></div>
-                <p>Processing...</p>
+                <p><i class="fa-solid fa-circle-notch fa-spin"></i> Processing video data...</p>
             </div>
             
+            <!-- Error State -->
             <div id="errorState" class="error-card hidden">
-                <div class="error-icon">⚠</div>
+                <div class="error-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
                 <p id="errorMessage"></p>
             </div>
             
+            <!-- Video Info -->
             <div id="videoInfo" class="video-info-card hidden"></div>
             
+            <!-- Results Grid -->
             <div id="resultsContainer" class="results-container hidden"></div>
             
+            <!-- Guide Card -->
             <div class="card guide-card">
-                <div class="card-title">Panduan</div>
+                <div class="card-title"><i class="fa-regular fa-compass"></i> Panduan Penggunaan</div>
                 <div class="guide-list">
-                    <div class="guide-item">1. Salin link video YouTube</div>
-                    <div class="guide-item">2. Tempelkan link di kolom URL</div>
-                    <div class="guide-item">3. Pilih Video MP4 atau Audio MP3</div>
-                    <div class="guide-item">4. Klik Convert Now</div>
-                    <div class="guide-item">5. Pilih kualitas, klik Download</div>
+                    <div class="guide-item"><i class="fa-regular fa-copy"></i> 1. Salin link video YouTube</div>
+                    <div class="guide-item"><i class="fa-solid fa-paste"></i> 2. Tempelkan link di kolom URL</div>
+                    <div class="guide-item"><i class="fa-solid fa-arrow-right-arrow-left"></i> 3. Pilih Video MP4 atau Audio MP3</div>
+                    <div class="guide-item"><i class="fa-solid fa-play"></i> 4. Klik Convert Now</div>
+                    <div class="guide-item"><i class="fa-solid fa-download"></i> 5. Pilih kualitas, klik Download</div>
                 </div>
             </div>
         </main>

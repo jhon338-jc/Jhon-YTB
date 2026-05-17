@@ -5,18 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>JHON YTB - Login</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0a0a0a">
+    <meta name="theme-color" content="#E6EEF5">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Perbaikan tambahan untuk shadow logo */
+        .logo-login {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-shadow: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+            letter-spacing: 2px;
+        }
+    </style>
 </head>
 <body class="login-body">
     <div class="login-wrapper">
+        <!-- Splash Layer 1: Website Name (3 detik) -->
         <div class="splash-overlay" id="splashWeb">
             <div class="splash-card">
-                <h1 class="splash-title">JHON YTB</h1>
+                <h1 class="logo-login" id="webLogo">JHON YTB</h1>
                 <div class="splash-progress"></div>
             </div>
         </div>
         
+        <!-- Splash Layer 2: Developer Name (2 detik) -->
         <div class="splash-overlay hidden" id="splashDev">
             <div class="splash-card">
                 <div class="dev-tag">
@@ -25,33 +39,40 @@
                     <span class="dev-bracket">⟩</span>
                 </div>
                 <div class="splash-progress"></div>
-                <p class="dev-status">system_ready</p>
+                <p class="dev-status">system_ready.exe</p>
             </div>
         </div>
         
+        <!-- Login Panel -->
         <div class="login-panel hidden" id="loginPanel">
             <div class="login-header">
-                <div class="login-icon">▶</div>
-                <h2>Access System</h2>
+                <div class="login-icon"><i class="fa-solid fa-music"></i></div>
+                <h2>Welcome Back</h2>
                 <p>YouTube Downloader</p>
             </div>
             <div class="login-body-form">
                 <input type="text" id="username" class="input-field" placeholder="Username" autocomplete="off">
-                <button onclick="loginUser()" class="btn btn-primary">Enter</button>
-                <small class="demo-text">Username wajib diisi</small>
+                <button onclick="loginUser()" class="btn-primary">Enter Now <i class="fa-solid fa-arrow-right"></i></button>
+                <small class="demo-text">* Masukkan username apapun untuk akses</small>
             </div>
         </div>
     </div>
 
     <script>
+        // PERBAIKAN: Jangan redirect otomatis ke dashboard jika belum login
+        // Hanya cek localStorage untuk menampilkan username nanti
+        
         const splashWeb = document.getElementById('splashWeb');
         const splashDev = document.getElementById('splashDev');
         const loginPanel = document.getElementById('loginPanel');
         
-        if (localStorage.getItem('jhon_user')) {
-            window.location.href = 'dashboard.html';
-        }
+        // PERBAIKAN: Hapus redirect otomatis yang salah
+        // if (localStorage.getItem('jhon_user')) {
+        //     window.location.href = 'dashboard.html';
+        // }
+        // Kode di atas dihapus karena menyebabkan redirect paksa ke dashboard
         
+        // 3 detik pertama (Nama Website)
         setTimeout(() => {
             splashWeb.classList.add('fade-out');
             setTimeout(() => {
@@ -59,6 +80,7 @@
                 splashDev.classList.remove('hidden');
                 splashDev.classList.add('fade-in');
                 
+                // 2 detik kedua (Nama Developer)
                 setTimeout(() => {
                     splashDev.classList.add('fade-out');
                     setTimeout(() => {
